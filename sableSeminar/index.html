@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>VeloCty</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style type="text/css">
+      @import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+	  .title {
+		font-size : 110px;
+	  }
+	  .subtitle{
+		font-size : 40px;
+	  }
+	  .hidden {
+			color:gray;
+	  }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+# .title[Velo<span style="color: blue">C</span>ty] <br/><br/> .subtitle[An optimising static compiler for Python and MATLAB]
+<br />
+###.right[Sameer Jagdale]
+
+---
+class: center
+
+# Scientific Languages
+<table cellpadding="20"> 
+	<tr> 
+		<td> <img src="julia.png" alt="Julia"></td> 
+		<td> <img src="NumPy.png" alt="NumPy"></td> 
+		<td> <img src="matlab.jpg" alt="Matlab" ></td> 
+	</tr>
+</table>
+--
+.left[
+- Allow easy prototyping.
+	
+- Have a gentle learning curve.
+]
+--
+
+
+- .left[However, performance is poor compared to statically compiled.]
+---
+class: center
+# Solution 1: Rewrite code in C++/Fortran 
+--
+<br/>
+<br/>
+![DarthVader](Darth_Vader.jpg)
+--
+	
+<br/>
+.left[
+- Declare types and dimensions of arrays. 
+	
+- Memory management. 
+	
+- Increased code size
+	
+- Steeper learning curve.
+]
+---
+class: center
+#Solution 2: Auto-compilation of whole programs to C++/Fortran
+.left[
+- Many constructs cannot be compiled ahead of time. 
+``` matlab
+function time  = mainFunction() 
+
+	A = rand(3,3);
+	
+	X = load('dataFile.mat');
+
+	Y = Y + 10;
+
+	time = coreFunction(A,X)
+end;
+```
+]
+---
+class: center
+#Solution 2: Auto-compilation of whole programs to C++/Fortran
+.left[
+- Many constructs cannot be compiled ahead of time. 
+
+``` matlab
+function time  = mainFunction() 
+
+	A = rand(3,3); 
+
+*	X = load('dataFile.mat');
+
+	Y = Y + 10;
+
+	time = coreFunction(A,X)
+end;
+```
+How do we determine type and dimensions of X  and therefore that of Y?
+]
+---
+#Solution 2: Auto-compilation of whole programs to C++/Fortran
+.left[
+- Many constructs cannot be compiled ahead of time. 
+
+``` matlab
+function time  = mainFunction() 
+
+	A = rand(3,3); 
+
+	X = load('dataFile.mat');
+
+	Y = Y + 10;
+
+*	time = coreFunction(A,Y)
+end;
+```
+If coreFunction is computationally intensive, why not compile only that ?
+]
+---
+# Agenda
+1. Introduction
+	
+2. Execution Model
+	
+3. Compilation pipeline
+	
+4. Glue code generation
+	
+5. Results	
+
+.hidden[Ulterior motive : Make talk so boring that everyone will be too sleepy to ask questions.]
+---
+# .center[Introduction]
+	
+<br/>
+- VeloCty is an optimizing compiler for array-based languages to C++. 
+	
+- Currently supports Matlab and Python's NumPy library.
+	
+- Implemented using the Velociraptor framework.
+	
+- Supports parallelism using OpenMP.
+
+- Also generates glue code. 
+	
+- Provides language-specific run time library.
+	
+- About 1.1 to 400 times faster than Mathworks' Matlab. 
+---
+# .center[Execution Model]
+
+<img src="WorkingDetails.svg" alt="Execution" style="width:100%;height:auto"> 
+
+    </textarea>
+    <script src="http://gnab.github.io/remark/downloads/remark-latest.min.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
