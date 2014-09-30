@@ -33,7 +33,6 @@ class: center, middle
 # .title[Velo<span style="color: blue">C</span>ty] <br/><br/> .subtitle[An optimising static compiler for Python and MATLAB]
 <br />
 ###.right[Sameer Jagdale]
-
 ---
 class: center
 
@@ -54,7 +53,7 @@ class: center
 --
 
 
-- .left[However, performance is poor compared to statically compiled.]
+- .left[However, performance is poor compared to statically compiled languages.]
 ---
 class: center
 # Solution 1: Rewrite code in C++/Fortran 
@@ -77,6 +76,8 @@ class: center
 ---
 class: center
 #Solution 2: Auto-compilation of whole programs to C++/Fortran
+--
+
 .left[
 - Many constructs cannot be compiled ahead of time. 
 ``` matlab
@@ -94,7 +95,7 @@ end;
 ]
 ---
 class: center
-#Solution 2: Auto-compilation of whole programs to C++/Fortran
+#Solution 2: Compiling computaionally intensive code sections. 
 .left[
 - Many constructs cannot be compiled ahead of time. 
 
@@ -113,7 +114,8 @@ end;
 How do we determine type and dimensions of X  and therefore that of Y?
 ]
 ---
-#Solution 2: Auto-compilation of whole programs to C++/Fortran
+#Solution 2: Compiling computaionally intensive code sections. 
+
 .left[
 - Many constructs cannot be compiled ahead of time. 
 
@@ -132,7 +134,7 @@ end;
 If coreFunction is computationally intensive, why not compile only that ?
 ]
 ---
-# Agenda
+# .center[ Agenda]
 1. Introduction
 	
 2. Execution Model
@@ -175,7 +177,7 @@ If coreFunction is computationally intensive, why not compile only that ?
 <img src="CompilationModel.svg" alt="Compilation" style="width:75%;height:auto" align="middle">
 ---
 #.center[Example Code]
-A Matlab implementation of the Babai nearest plane algorithm.
+A Matlab implementation of the mcpi benchmark.
 ```matlab
 function  mcpi_p(N,P)
 	result=0;
@@ -195,7 +197,7 @@ end
 ```
 ---
 #.center[Example Code]
-Generated C++ code of the Babai nearest plane algorithm.
+Generated C++ code of the mcpi benchmark. 
 ``` C
 void mcpi_p(double N, double P) 
 {
